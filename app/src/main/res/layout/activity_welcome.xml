@@ -4,6 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/login_pic"
     tools:context=".WelcomeActivity">
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/showdescriptioncontenttitle"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+
+        >
+
+        <TextView
+            android:id="@+id/textView_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome "
+            android:textSize="24sp"
+
+            android:gravity="center"
+            />
+
+
+        <TextView
+            android:id="@+id/textView_name"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:text="TextView"
+            android:textSize="24sp"
+
+            android:gravity="center"
+            />
+
+
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
