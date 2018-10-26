@@ -5,46 +5,34 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.google.firebase.database.*;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText inputUsername;
-    private EditText inputPassword;
     public static final String EXTRA_TEXT = "com.seg2015.group.homeserviceondemand.EXTRA_TEXT";
-    private FirebaseAuth auth;
-    private FirebaseAuth.AuthStateListener authListnener;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        auth = FirebaseAuth.getInstance();
-        inputUsername = (EditText) findViewById(R.id.userName_Field);
-        inputPassword = (EditText) findViewById(R.id.password_Field);
         Button button = (Button) findViewById(R.id.login_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startSignIn();
-                openWelcomeActivity();
-
             }
         });
 
     }
 
-    public void openWelcomeActivity(){
+    public void openWelcomeActivity(User user){
 
         EditText userName_Field = (EditText) findViewById(R.id.userName_Field);
 
@@ -52,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, WelcomeActivity.class);
 
-        intent.putExtra(EXTRA_TEXT, text);
+        intent.putExtra("userClass", user);
 
         startActivity(intent);
 
@@ -64,18 +52,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startSignIn(){
-        String username=inputUsername.getText().toString();
-        String password=inputPassword.getText().toString();
+        final String username= ((EditText) findViewById(R.id.userName_Field)).getText().toString();
+        final String password= ((EditText) findViewById(R.id.password_Field)).getText().toString();
+
         if(TextUtils.isEmpty(username) || TextUtils.isEmpty(password)){
             Toast.makeText(MainActivity.this, "Fields are empty", Toast.LENGTH_LONG).show();
         }
         else{
-            auth.signInWithEmailAndPassword(username,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            final DatabaseReference database = FirebaseDatabase.getInstance().getReference("users");
+
+            database.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(!task.isSuccessful()){
-                        Toast.makeText(MainActivity.this, "Sign-In Problem", Toast.LENGTH_LONG).show();
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                        User user = postSnapshot.getValue(User.class);
+                        if (username.equals(user.getName())&&password.equals(user.getPassword())){
+                            openWelcomeActivity(user);
+                        }
                     }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
                 }
             });
         }

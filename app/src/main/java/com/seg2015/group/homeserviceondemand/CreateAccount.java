@@ -92,8 +92,8 @@ public class CreateAccount extends AppCompatActivity {
             toast.show();
         }
         else {
-             if (password.length() < 8){
-                 Toast toast = Toast.makeText(getApplicationContext(), "Password must be at least 8 characters", Toast.LENGTH_SHORT);
+             if (password.length() < 5){
+                 Toast toast = Toast.makeText(getApplicationContext(), "Password must be at least 5 characters", Toast.LENGTH_SHORT);
                  toast.show();
              }
              else if (!(password.equals(passwordConfirm))){

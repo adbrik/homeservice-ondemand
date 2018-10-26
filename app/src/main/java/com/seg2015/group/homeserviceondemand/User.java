@@ -1,6 +1,8 @@
 package com.seg2015.group.homeserviceondemand;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     private String name;
     private String password;
@@ -10,6 +12,10 @@ public class User {
         this.name = name;
         this.password=password;
         this.type = type;
+    }
+
+    public  User(){
+
     }
 
     public String getName() {
