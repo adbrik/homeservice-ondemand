@@ -42,4 +42,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    protected void onClick(View v){
+        Intent i = new Intent(MainActivity.this,CreateAccount.class);
+        startActivity(i);
+    }
 }
