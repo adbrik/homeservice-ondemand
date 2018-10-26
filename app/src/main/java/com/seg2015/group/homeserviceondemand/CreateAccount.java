@@ -1,6 +1,7 @@
 package com.seg2015.group.homeserviceondemand;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -21,6 +22,8 @@ public class CreateAccount extends AppCompatActivity {
     private String type;
     private Button button;
     private DatabaseReference databaseUsers;
+    private DatabaseReference admin;
+    private boolean adminCreated;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +31,41 @@ public class CreateAccount extends AppCompatActivity {
         setContentView(R.layout.activity_create_account);
         FirebaseApp.initializeApp(this);
         databaseUsers = FirebaseDatabase.getInstance().getReference("users");
+        admin = FirebaseDatabase.getInstance().getReference("settings");
 
         button = (Button)findViewById(R.id.button3);
+        adminCreated = false;
+    }
+
+    protected void onStart(){
+        super.onStart();
+        admin.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()){
+                    boolean isAdmin = postSnapshot.getValue(java.lang.Boolean.class);
+                    if (isAdmin){
+                        adminCreated = true;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
     public void onClickType(View view){
         final PopupMenu popupMenu = new PopupMenu(getApplicationContext(),button);
-        popupMenu.getMenuInflater().inflate(R.menu.type_menu,popupMenu.getMenu());
+        if (adminCreated)
+            popupMenu.getMenuInflater().inflate(R.menu.type_woutadmin_menu,popupMenu.getMenu());
+        else
+            popupMenu.getMenuInflater().inflate(R.menu.type_menu,popupMenu.getMenu());
+
+
 
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
@@ -78,8 +108,11 @@ public class CreateAccount extends AppCompatActivity {
                 Toast toast = Toast.makeText(getApplicationContext(), "Account Created!", Toast.LENGTH_SHORT);
                 toast.show();
                 String id = databaseUsers.push().getKey();
-                User user = new User(username,password, "USER");
+                User user = new User(username,password, type);
                 databaseUsers.child(id).setValue(user);
+                if (type.equals("ADMIN")){
+                   admin.child(admin.push().getKey()) .setValue(true);
+                }
                 finish();
             }
         }
