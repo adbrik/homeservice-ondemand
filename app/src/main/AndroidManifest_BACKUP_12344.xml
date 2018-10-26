@@ -16,8 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+<<<<<<< HEAD
+        <activity android:name=".WelcomeActivity"></activity>
+=======
         <activity android:name=".CreateAccount"></activity>
+>>>>>>> createScreen
     </application>
 
 </manifest>
