@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    protected void onClick(View v){
+    public void onClick(View v){
         Intent i = new Intent(MainActivity.this,CreateAccount.class);
         startActivity(i);
     }
@@ -79,5 +79,4 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
-
 }
