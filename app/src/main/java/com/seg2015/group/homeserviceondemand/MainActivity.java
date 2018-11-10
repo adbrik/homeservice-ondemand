@@ -42,8 +42,9 @@ public class MainActivity extends AppCompatActivity {
 
         intent.putExtra("userClass", user);
 
-        startActivity(intent);
+        //startActivity(intent);
 
+        startActivity(new Intent(this, ListActivity.class));
     }
 
     public void onClick(View v){

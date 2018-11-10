@@ -37,7 +37,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         TextView textView_name = (TextView) findViewById(R.id.textView_name);
 
-        textView_name.setText(text + "! You're account is type :"+ type + " " );
+        textView_name.setText(text + "! You're account is type :"+ type + " ");
 
 
     }
