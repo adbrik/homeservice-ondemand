@@ -3,10 +3,13 @@ package com.seg2015.group.homeserviceondemand;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -15,6 +18,7 @@ public class ListActivity extends AppCompatActivity {
     ListView listView;
     ServiceAdapter adapter;
     ServiceManager manager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +31,28 @@ public class ListActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
-            public void onItemClick(AdapterView<?> parent,final View view, int position, long id){
+            public void onItemClick(AdapterView<?> parent, final View view, final int position, long id){
                 final String item = (String)parent.getItemAtPosition(position);
+                int pos = parent.getPositionForView(view);
+                Toast.makeText(getApplicationContext(),pos+"",Toast.LENGTH_SHORT).show();
+
+                PopupMenu popup = new PopupMenu(ListActivity.this, view);
+                popup.getMenuInflater().inflate(R.menu.list_menu, popup.getMenu());
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if (item.getTitle().toString().equals("Modify")){
+                            Intent intent = new Intent(listView.getContext(),ListEditorActivity.class);
+                            listView.getContext().startActivity(intent);
+                        }
+                        if (item.getTitle().toString().equals("Delete"));
+                        Service currentService = manager.getServiceAt(position);
+                        adapter.delete(currentService);
+                        return true;
+                    }
+                });
+                popup.show();
+
             }
         });
     }

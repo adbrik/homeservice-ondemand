@@ -65,8 +65,6 @@ public class CreateAccount extends AppCompatActivity {
         else
             popupMenu.getMenuInflater().inflate(R.menu.type_menu,popupMenu.getMenu());
 
-
-
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
