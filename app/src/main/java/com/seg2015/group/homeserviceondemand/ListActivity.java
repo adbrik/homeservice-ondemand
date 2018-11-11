@@ -12,6 +12,7 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
 
@@ -33,21 +34,25 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, final int position, long id){
                 final String item = (String)parent.getItemAtPosition(position);
-                int pos = parent.getPositionForView(view);
-                Toast.makeText(getApplicationContext(),pos+"",Toast.LENGTH_SHORT).show();
+                final int pos = parent.getPositionForView(view);
+                //Toast.makeText(getApplicationContext(),pos+"",Toast.LENGTH_SHORT).show();
 
                 PopupMenu popup = new PopupMenu(ListActivity.this, view);
                 popup.getMenuInflater().inflate(R.menu.list_menu, popup.getMenu());
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        if (item.getTitle().toString().equals("Modify")){
-                            Intent intent = new Intent(listView.getContext(),ListEditorActivity.class);
-                            listView.getContext().startActivity(intent);
+                        if (item.getTitle().toString().equals("Delete")){
+                            Service currentService = manager.getServiceAt(pos);
+                            adapter.delete(currentService);
                         }
-                        if (item.getTitle().toString().equals("Delete"));
-                        Service currentService = manager.getServiceAt(position);
-                        adapter.delete(currentService);
+                        if (item.getTitle().toString().equals("Modify")){
+                            Service service = manager.getServiceAt(pos);
+                            String serviceName  = service.getService();
+                            Intent i = new Intent(ListActivity.this, ListEditorActivity.class);
+                            i.putExtra("name", serviceName);
+                            startActivity(i);
+                        }
                         return true;
                     }
                 });

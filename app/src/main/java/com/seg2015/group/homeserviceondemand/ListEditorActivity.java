@@ -27,6 +27,8 @@ public class ListEditorActivity extends AppCompatActivity {
         Button saveButton = (Button) findViewById(R.id.buttonSave);
         Button cancelButton = (Button) findViewById(R.id.buttonCancel);
 
+        final Bundle bundle = getIntent().getExtras();
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,17 +53,31 @@ public class ListEditorActivity extends AppCompatActivity {
                     flag = false;
                 }
                 int counter = 0;
-                while ((flag == true) && (counter < manager.getServiceList().size())) {
-                    String x = manager.getServiceAt(counter).getService();
-                    if (sName.equals(x)) {
-                        Toast toast = Toast.makeText(getApplicationContext(), "Service already added", Toast.LENGTH_SHORT);
-                        toast.show();
-                        flag = false;
+                if(bundle != null){
+                    String j =(String) bundle.get("name");
+                    while ((flag == true) && (counter < manager.getServiceList().size())) {
+                        String x = manager.getServiceAt(counter).getService();
+                        if (j.equals(x)) {
+                            manager.getServiceAt(counter).setService(sName);
+                            manager.getServiceAt(counter).setRate(sRate);
+                            flag = false;
+                        }
+                        counter++;
                     }
-                    counter++;
                 }
-                if(flag==true){
-                    ServiceManager.getInstance().getServiceList().add(newService);
+                else{
+                    while ((flag == true) && (counter < manager.getServiceList().size())) {
+                        String x = manager.getServiceAt(counter).getService();
+                        if (sName.equals(x)) {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Service already added", Toast.LENGTH_SHORT);
+                            toast.show();
+                            flag = false;
+                        }
+                        counter++;
+                    }
+                    if(flag==true){
+                        ServiceManager.getInstance().getServiceList().add(newService);
+                    }
                 }
                 finish();
             }
