@@ -1,6 +1,5 @@
 package com.seg2015.group.homeserviceondemand;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,9 +20,7 @@ public class ListEditorActivity extends AppCompatActivity {
 
         final Service newService = new Service("","");
 
-        Intent intent = getIntent();
-        //int serviceIndex = intent.getIntExtra(intent.EXTRA_PHONE_NUMBER,0);
-        //final Service editService = ServiceManager.getInstance().getServiceAt(serviceIndex);
+
         final EditText serviceName = (EditText) findViewById(R.id.line02);
         final EditText serviceRate = (EditText) findViewById(R.id.line04);
 
@@ -64,12 +61,7 @@ public class ListEditorActivity extends AppCompatActivity {
                     counter++;
                 }
                 if(flag==true){
-                    //if (isAdd)
-                        ServiceManager.getInstance().getServiceList().add(newService);
-                    //else{
-                        //editService.setService(serviceName.getText().toString());
-                        //editService.setRate(serviceRate.getText().toString());
-                    //}
+                    ServiceManager.getInstance().getServiceList().add(newService);
                 }
                 finish();
             }

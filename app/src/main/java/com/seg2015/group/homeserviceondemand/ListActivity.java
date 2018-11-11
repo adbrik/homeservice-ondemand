@@ -23,7 +23,6 @@ public class ListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-
         listView = (ListView)findViewById(R.id.list);
 
         manager = ServiceManager.getInstance();
@@ -44,14 +43,11 @@ public class ListActivity extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         if (item.getTitle().toString().equals("Modify")){
                             Intent intent = new Intent(listView.getContext(),ListEditorActivity.class);
-                            intent.putExtra("POSITION",position);
-                            intent.putExtra("ADD",false);
-                            startActivityForResult(intent,0);
+                            listView.getContext().startActivity(intent);
                         }
-                        if (item.getTitle().toString().equals("Delete")) {
-                            Service currentService = manager.getServiceAt(position);
-                            adapter.delete(currentService);
-                        }
+                        if (item.getTitle().toString().equals("Delete"));
+                        Service currentService = manager.getServiceAt(position);
+                        adapter.delete(currentService);
                         return true;
                     }
                 });
@@ -63,13 +59,10 @@ public class ListActivity extends AppCompatActivity {
 
     public void addToList(View view){
         Intent launchListEditor = new Intent(getApplicationContext(), ListEditorActivity.class);
-        //launchListEditor.putExtra(Intent.EXTRA_TEXT,true);
-        //launchListEditor.putExtra(Intent.EXTRA_PHONE_NUMBER, 0);
         startActivityForResult(launchListEditor, 0);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         adapter.notifyDataSetChanged();
-        listView.refreshDrawableState();
     }
 }
