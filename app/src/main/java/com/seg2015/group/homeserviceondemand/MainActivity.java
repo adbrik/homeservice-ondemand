@@ -43,8 +43,13 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("userClass", user);
 
         //startActivity(intent);
-
-        startActivity(new Intent(this, ListActivity.class));
+        if(user.getType().equals("ADMIN")) {
+            startActivity(new Intent(this, ListActivity.class));
+        }
+        else {
+            startActivity(intent);
+        }
+        //startActivity(new Intent(this, ListActivity.class));
     }
 
     public void onClick(View v){
