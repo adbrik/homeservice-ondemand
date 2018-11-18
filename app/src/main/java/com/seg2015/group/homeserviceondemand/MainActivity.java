@@ -46,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
         if(user.getType().equals("ADMIN")) {
             startActivity(new Intent(this, ListActivity.class));
         }
+        else if (user.getType().equals("PROV")){
+            startActivity(new Intent(this, ServiceProviderActivity.class));
+        }
         else {
             startActivity(intent);
         }

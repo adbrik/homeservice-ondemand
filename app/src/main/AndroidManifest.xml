@@ -19,7 +19,8 @@
         <activity android:name=".WelcomeActivity" />
         <activity android:name=".CreateAccount" />
         <activity android:name=".ListActivity" />
-        <activity android:name=".ListEditorActivity"></activity>
+        <activity android:name=".ListEditorActivity" />
+        <activity android:name=".ServiceProviderActivity"></activity>
     </application>
 
 </manifest>
