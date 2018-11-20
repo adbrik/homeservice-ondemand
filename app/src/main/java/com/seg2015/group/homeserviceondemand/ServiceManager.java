@@ -3,6 +3,7 @@ package com.seg2015.group.homeserviceondemand;
 import java.util.ArrayList;
 
 public class ServiceManager {
+
     private static ServiceManager instance = null;
     private ArrayList<Service> serviceList;
 
@@ -26,4 +27,5 @@ public class ServiceManager {
     public Service getServiceAt(int index) {
         return serviceList.get(index);
     }
+
 }
