@@ -18,7 +18,6 @@ public class AddService extends AppCompatActivity {
     ListView listView;
     ServiceAdapter adapter;
     ServiceManager manager;
-    ServiceProviderActivity providerList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +43,6 @@ public class AddService extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         if (item.getTitle().toString().equals("Add")){
                             Service currentService = manager.getServiceAt(pos);
-
-
                             Intent intent = new Intent(AddService.this, ServiceProviderActivity.class);
                             String x = currentService.getService();
                             String y = currentService.getRate();
