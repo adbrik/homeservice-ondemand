@@ -67,8 +67,8 @@ public class ServiceProviderActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.profile:
-                Toast toast = Toast.makeText(getApplicationContext(), "Profile", Toast.LENGTH_SHORT);
-                toast.show();
+                Intent intent = new Intent(this, DisplayProfileActivity.class);
+                startActivity(intent);
                 return true;
             case R.id.service:
                 Intent i = new Intent(this, AddService.class);

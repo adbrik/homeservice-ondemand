@@ -15,6 +15,7 @@ import com.google.firebase.database.*;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static String currentUserName;
     public static final String EXTRA_TEXT = "com.seg2015.group.homeserviceondemand.EXTRA_TEXT";
 
     @Override
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         EditText userName_Field = (EditText) findViewById(R.id.userName_Field);
 
         String text = userName_Field.getText().toString();
+
+        currentUserName = text;
 
         Intent intent = new Intent(this, WelcomeActivity.class);
 

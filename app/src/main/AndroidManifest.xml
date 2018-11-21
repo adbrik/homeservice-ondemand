@@ -22,6 +22,8 @@
         <activity android:name=".ListEditorActivity" />
         <activity android:name=".ServiceProviderActivity" />
         <activity android:name=".AddService"></activity>
+        <activity android:name=".DisplayProfileActivity"/>
+        <activity android:name=".EditProfileActivity"/>
     </application>
 
 </manifest>
