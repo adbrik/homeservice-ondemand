@@ -49,7 +49,7 @@ public class AddService extends AppCompatActivity {
                             intent.putExtra("name", x);
                             intent.putExtra("rate", y);
                             setResult(1, intent);
-                            finish();
+                            startActivityForResult(new Intent(AddService.this,AvailabilityActivity.class),1);
                         }
                         return true;
                     }
@@ -60,5 +60,9 @@ public class AddService extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        finish();
+    }
 
 }

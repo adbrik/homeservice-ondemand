@@ -69,5 +69,7 @@ public class ListActivity extends AppCompatActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         adapter.notifyDataSetChanged();
+        listView.refreshDrawableState();
     }
+
 }
