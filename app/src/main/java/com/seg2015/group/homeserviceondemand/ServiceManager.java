@@ -4,28 +4,28 @@ import java.util.ArrayList;
 
 public class ServiceManager {
 
-    private static ServiceManager instance = null;
-    private ArrayList<Service> serviceList;
+  private static ServiceManager instance = null;
+  private ArrayList<Service> serviceList;
 
-    protected ServiceManager() {
+  protected ServiceManager() {
 
-        serviceList = new ArrayList<>();
+    serviceList = new ArrayList<>();
 
+  }
+
+  public static ServiceManager getInstance() {
+    if (instance == null) {
+      instance = new ServiceManager();
     }
+    return instance;
+  }
 
-    public static ServiceManager getInstance() {
-        if (instance == null) {
-            instance = new ServiceManager();
-        }
-        return instance;
-    }
+  public ArrayList<Service> getServiceList() {
+    return serviceList;
+  }
 
-    public ArrayList<Service> getServiceList() {
-        return serviceList;
-    }
-
-    public Service getServiceAt(int index) {
-        return serviceList.get(index);
-    }
+  public Service getServiceAt(int index) {
+    return serviceList.get(index);
+  }
 
 }

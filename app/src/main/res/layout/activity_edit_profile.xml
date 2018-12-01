@@ -83,6 +83,21 @@
             android:inputType="textPersonName"
             android:text="" />
 
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Licensed (Yes/No):"
+            android:layout_marginLeft="10dp"/>
+
+        <EditText
+            android:id="@+id/licensedEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="" />
+
         <Button
             android:id="@+id/save_button"
             android:layout_width="match_parent"

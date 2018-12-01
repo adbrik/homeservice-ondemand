@@ -21,10 +21,12 @@ public class EditProfileActivity extends AppCompatActivity {
     private EditText addressEdit;
     private EditText companyEdit;
     private EditText genDesEdit;
+    private EditText licensedEdit;
     String sPhone;
     String sAddress;
     String sCompany;
     String sGenDes;
+    String sLicensed;
 
 
 
@@ -39,6 +41,7 @@ public class EditProfileActivity extends AppCompatActivity {
         EditText addressEdit = (EditText) findViewById(R.id.addressEditText);
         EditText companyEdit = (EditText) findViewById(R.id.companyEditText);
         EditText genDesEdit = (EditText) findViewById(R.id.genDesEditText);
+        EditText licensedEdit = (EditText) findViewById(R.id.licensedEditText);
 
         for (MyProfile profile: profiles){
             if (profile.getUserName().equals(MainActivity.currentUserName)){
@@ -46,6 +49,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 phoneEdit.setText(profile.getPhoneNum());
                 companyEdit.setText(profile.getCompany());
                 genDesEdit.setText(profile.getGenDes());
+                licensedEdit.setText(profile.getLicensed());
             }
         }
 
@@ -80,6 +84,7 @@ public class EditProfileActivity extends AppCompatActivity {
         EditText addressEdit = (EditText) findViewById(R.id.addressEditText);
         EditText companyEdit = (EditText) findViewById(R.id.companyEditText);
         EditText genDesEdit = (EditText) findViewById(R.id.genDesEditText);
+        EditText licensedEdit = (EditText) findViewById(R.id.licensedEditText);
 
         boolean found = false;
 
@@ -88,6 +93,7 @@ public class EditProfileActivity extends AppCompatActivity {
         sAddress = addressEdit.getText().toString();
         sCompany = companyEdit.getText().toString();
         sGenDes = genDesEdit.getText().toString();
+        sLicensed = licensedEdit.getText().toString();
 
         for (MyProfile profile: profiles){
             if (profile.getUserName().equals(MainActivity.currentUserName)){
@@ -95,13 +101,14 @@ public class EditProfileActivity extends AppCompatActivity {
                 profile.setAddress(sAddress);
                 profile.setGenDes(sGenDes);
                 profile.setPhoneNum(sPhone);
+                profile.setLicensed(sLicensed);
                 found = true;
             }
         }
 
         if(!found){
 
-            MyProfile newProfile = new MyProfile(MainActivity.currentUserName, sAddress, sPhone, sCompany, sGenDes);
+            MyProfile newProfile = new MyProfile(MainActivity.currentUserName, sAddress, sPhone, sCompany, sGenDes, sLicensed);
             profiles.add(newProfile);
         }
 
@@ -124,9 +131,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
         }
 
-            saveData();
-            Intent i = new Intent(this, DisplayProfileActivity.class);
-            startActivity(i);
+        saveData();
+        finish();
 
     }
 }

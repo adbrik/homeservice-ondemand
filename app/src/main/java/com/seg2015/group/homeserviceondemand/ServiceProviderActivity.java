@@ -7,30 +7,35 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class ServiceProviderActivity extends AppCompatActivity {
 
-    ListView listView;
-    ServiceProviderAdapter serviceAdapter;
-    Service service;
-    ArrayList<Service> services;
-    ArrayList<String> names = new ArrayList<>();
+    private ExpandableListView listView;
+    private ServiceProviderAdapter serviceAdapter;
+    private Service service;
+    private ArrayList<Service> services;
+    private ArrayList<String> names = new ArrayList<>();
+    private HashMap<String,ArrayList<String>> listHashMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_provider);
 
-        listView = (ListView)findViewById(R.id.service_provider);
+        listView = (ExpandableListView)findViewById(R.id.service_provider);
         services = new ArrayList<>();
-        serviceAdapter = new ServiceProviderAdapter(this, services);
+        listHashMap = new HashMap<>();
+        serviceAdapter = new ServiceProviderAdapter(this, services, listHashMap);
         listView.setAdapter(serviceAdapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+       /* listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, final int position, long id){
                 final String item = (String)parent.getItemAtPosition(position);
@@ -52,7 +57,7 @@ public class ServiceProviderActivity extends AppCompatActivity {
                 popup.show();
 
             }
-        });
+        });*/
 
     }
 

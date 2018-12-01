@@ -7,13 +7,23 @@ public class MyProfile {
     private String address;
     private String company;
     private String genDes;
+    private String licensed;
 
-    public MyProfile(String userName, String address, String phoneNum, String company, String genDes){
+    public String getLicensed() {
+        return licensed;
+    }
+
+    public void setLicensed(String licensed) {
+        this.licensed = licensed;
+    }
+
+    public MyProfile(String userName, String address, String phoneNum, String company, String genDes, String licensed){
         this.userName = userName;
         this.phoneNum = phoneNum;
         this.address = address;
         this.company = company;
         this.genDes = genDes;
+        this.licensed = licensed;
     }
 
     public String getUserName() {

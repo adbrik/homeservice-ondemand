@@ -83,6 +83,21 @@
             android:text="To be added"
             android:layout_margin="10dp"/>
 
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Licensed:"
+            android:layout_marginLeft="10dp"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/licensedTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="To be added"
+            android:layout_margin="10dp"/>
+
         <Button
             android:id="@+id/editProfile_button"
             android:layout_width="match_parent"

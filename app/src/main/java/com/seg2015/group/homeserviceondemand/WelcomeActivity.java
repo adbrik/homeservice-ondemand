@@ -17,28 +17,28 @@ import java.util.ArrayList;
 
 public class WelcomeActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_welcome);
 
-        User model = (User) getIntent().getSerializableExtra("userClass");
+    User model = (User) getIntent().getSerializableExtra("userClass");
 
-        String text = model.getName();
-        String type = model.getType();
+    String text = model.getName();
+    String type = model.getType();
 
-        if (type.equals("USER"))
-            type = "Home Owner";
-        if (type.equals("PROV"))
-            type = "Service Provider";
-        if (type.equals("ADMIN")) {
-            type = "Admin";
-        }
-
-        TextView textView_name = (TextView) findViewById(R.id.textView_name);
-
-        textView_name.setText(text + "! You're account is type :"+ type + " ");
-
-
+    if (type.equals("USER"))
+      type = "Home Owner";
+    if (type.equals("PROV"))
+      type = "Service Provider";
+    if (type.equals("ADMIN")) {
+      type = "Admin";
     }
+
+    TextView textView_name = (TextView) findViewById(R.id.textView_name);
+
+    textView_name.setText(text + "! You're account is type :"+ type + " ");
+
+
+  }
 }
