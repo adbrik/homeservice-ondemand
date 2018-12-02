@@ -14,31 +14,14 @@ public class ServiceProviderAdapter extends BaseExpandableListAdapter{
 
     private final Context context;
     private static ArrayList<Service> serviceProvider;
-    private HashMap<String,ArrayList<String>> listHashMap;
+    private HashMap<Service,ArrayList<String>> listHashMap;
 
-    public ServiceProviderAdapter(Context context, ArrayList<Service> values,HashMap<String,ArrayList<String>> listHashMap) {
+    public ServiceProviderAdapter(Context context, ArrayList<Service> values,HashMap<Service,ArrayList<String>> listHashMap) {
         this.context = context;
         this.serviceProvider = values;
         this.listHashMap = listHashMap;
     }
-
-    /*public View getView(int position, View convertView, ViewGroup parent) {
-        //Getting Recipe
-        Service curService = serviceProvider.get(position);
-
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        View rowView = inflater.inflate(R.layout.list_item_layout, parent, false);
-        TextView serviceName = (TextView) rowView.findViewById(R.id.itemName);
-        TextView hourlyRate = (TextView) rowView.findViewById(R.id.itemDescription);
-
-        //Placing content into recipe List Item
-        serviceName.setText(curService.getService());
-        hourlyRate.setText((curService.getRate()));
-
-        return rowView;
-    }*/
-
+    
     @Override
     public View getGroupView(int position, boolean b, View view, ViewGroup viewGroup) {
         Service curService = serviceProvider.get(position);

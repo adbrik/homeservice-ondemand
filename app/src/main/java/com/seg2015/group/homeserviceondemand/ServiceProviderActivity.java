@@ -22,7 +22,7 @@ public class ServiceProviderActivity extends AppCompatActivity {
     private Service service;
     private ArrayList<Service> services;
     private ArrayList<String> names = new ArrayList<>();
-    private HashMap<String,ArrayList<String>> listHashMap;
+    private HashMap<Service,ArrayList<String>> listHashMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +91,7 @@ public class ServiceProviderActivity extends AppCompatActivity {
             service = new Service("","");
             String x = intent.getStringExtra("name");
             String y = intent.getStringExtra("rate");
+            ArrayList<String> z = intent.getStringArrayListExtra("userdata");
 
             if(names.contains(x)){
                 Toast toast = Toast.makeText(getApplicationContext(), "Service already added. Try again!", Toast.LENGTH_SHORT);
@@ -101,6 +102,7 @@ public class ServiceProviderActivity extends AppCompatActivity {
                 service.setService(x);
                 service.setRate(y);
                 services.add(service);
+                listHashMap.put(services.get(services.size()-1),z);
                 serviceAdapter.notifyDataSetChanged();
             }
         }

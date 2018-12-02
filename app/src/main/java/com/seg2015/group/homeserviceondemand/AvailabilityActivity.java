@@ -1,5 +1,6 @@
 package com.seg2015.group.homeserviceondemand;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -43,8 +44,10 @@ public class AvailabilityActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!(availabilities.isEmpty()))
+                if (!(availabilities.isEmpty())) {
+                    setResult(1, new Intent(AvailabilityActivity.this, AddService.class).putStringArrayListExtra ("userdata",availabilities));
                     finish();
+                }
                 else
                     Toast.makeText(getApplicationContext(),"Please Make at least one availability",Toast.LENGTH_SHORT).show();
             }
