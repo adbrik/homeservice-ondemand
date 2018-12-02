@@ -49,8 +49,6 @@ public class HomeOwnerActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()){
                     FullService service = postSnapshot.getValue(FullService.class);
-                    Toast toast = Toast.makeText(getApplicationContext(), service.getProvider() + service.getServiceName()+service.getServiceRate()+service.getServiceRating(), Toast.LENGTH_SHORT);
-                    toast.show();
                     services.add(service);
                 }
             }

@@ -30,7 +30,7 @@ public class HomeOwnerAdapter extends BaseExpandableListAdapter{
         if(view == null)
         {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.list_item_layout,null);
+            view = inflater.inflate(R.layout.list_home_owner_layout,null);
         }
         TextView serviceName = (TextView) view.findViewById(R.id.itemName);
         TextView hourlyRate = (TextView) view.findViewById(R.id.itemDescription);
@@ -75,7 +75,8 @@ public class HomeOwnerAdapter extends BaseExpandableListAdapter{
 
     @Override
     public int getChildrenCount(int i) {
-        return listHashMap.get(serviceProvider.get(i)).size();
+        //return listHashMap.get(serviceProvider.get(i)).size(); ARIK needs to fix this
+        return listHashMap.size();
     }
 
     @Override

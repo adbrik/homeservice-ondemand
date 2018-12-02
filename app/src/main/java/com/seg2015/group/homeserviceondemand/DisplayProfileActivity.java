@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.w3c.dom.Text;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -21,6 +23,7 @@ public class DisplayProfileActivity extends AppCompatActivity {
     private TextView phoneText;
     private TextView companyText;
     private TextView genDesText;
+    private TextView licensedText;
     private boolean found;
 
     public static ArrayList<MyProfile> profiles;
@@ -35,12 +38,11 @@ public class DisplayProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_profile);
         loadData();
 
-
-
         TextView addressText = (TextView) findViewById(R.id.addressTextView);
         TextView phoneText = (TextView) findViewById(R.id.phoneTextView);
         TextView companyText = (TextView) findViewById(R.id.companyTextView);
         TextView genDesText = (TextView) findViewById(R.id.genDesTextView);
+        TextView licensedText = (TextView) findViewById(R.id.licensedTextView);
 
         for (MyProfile profile: profiles){
             if (profile.getUserName().equals(MainActivity.currentUserName)){
@@ -48,6 +50,7 @@ public class DisplayProfileActivity extends AppCompatActivity {
                 phoneText.setText(profile.getPhoneNum());
                 companyText.setText(profile.getCompany());
                 genDesText.setText(profile.getGenDes());
+                licensedText.setText(profile.getLicensed());
             }
         }
 
