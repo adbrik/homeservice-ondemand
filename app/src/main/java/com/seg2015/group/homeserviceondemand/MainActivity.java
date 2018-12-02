@@ -53,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, ServiceProviderActivity.class));
         }
         else {
-            startActivity(intent);
+            if (user.getType().equals("USER"))
+            startActivity(new Intent(this, HomeOwnerActivity.class));
         }
-        //startActivity(new Intent(this, ListActivity.class));
     }
 
     public void onClick(View v){

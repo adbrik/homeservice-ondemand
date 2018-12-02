@@ -24,7 +24,8 @@
         <activity android:name=".AddService" />
         <activity android:name=".DisplayProfileActivity" />
         <activity android:name=".EditProfileActivity" />
-        <activity android:name=".AvailabilityActivity"></activity>
+        <activity android:name=".AvailabilityActivity" />
+        <activity android:name=".HomeOwnerActivity"></activity>
     </application>
 
 </manifest>

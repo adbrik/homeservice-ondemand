@@ -11,6 +11,10 @@ import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +27,7 @@ public class ServiceProviderActivity extends AppCompatActivity {
     private ArrayList<Service> services;
     private ArrayList<String> names = new ArrayList<>();
     private HashMap<Service,ArrayList<String>> listHashMap;
+    private DatabaseReference databaseUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,9 @@ public class ServiceProviderActivity extends AppCompatActivity {
         listHashMap = new HashMap<>();
         serviceAdapter = new ServiceProviderAdapter(this, services, listHashMap);
         listView.setAdapter(serviceAdapter);
+
+        databaseUsers = FirebaseDatabase.getInstance().getReference("services");
+
 
         listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener(){
             @Override
@@ -105,6 +113,12 @@ public class ServiceProviderActivity extends AppCompatActivity {
                 listHashMap.put(services.get(services.size()-1),z);
                 listView.expandGroup(services.size()-1);
                 serviceAdapter.notifyDataSetChanged();
+
+                String id = databaseUsers.push().getKey();
+                databaseUsers.child(id).setValue(new FullService("Arik",service.getService(),service.getRate(),"0"));
+                DatabaseReference newRef = databaseUsers.child(id);
+                String nId = newRef.push().getKey();
+                newRef.child(nId).setValue(z);
             }
         }
     }
