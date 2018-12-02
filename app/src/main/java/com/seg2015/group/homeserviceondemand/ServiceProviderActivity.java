@@ -35,9 +35,9 @@ public class ServiceProviderActivity extends AppCompatActivity {
         serviceAdapter = new ServiceProviderAdapter(this, services, listHashMap);
         listView.setAdapter(serviceAdapter);
 
-       /* listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener(){
             @Override
-            public void onItemClick(AdapterView<?> parent, final View view, final int position, long id){
+            public boolean onGroupClick(ExpandableListView parent, final View view, final int position, long id){
                 final String item = (String)parent.getItemAtPosition(position);
                 final int pos = parent.getPositionForView(view);
 
@@ -55,9 +55,9 @@ public class ServiceProviderActivity extends AppCompatActivity {
                     }
                 });
                 popup.show();
-
+                return true;
             }
-        });*/
+        });
 
     }
 
@@ -103,6 +103,7 @@ public class ServiceProviderActivity extends AppCompatActivity {
                 service.setRate(y);
                 services.add(service);
                 listHashMap.put(services.get(services.size()-1),z);
+                listView.expandGroup(services.size()-1);
                 serviceAdapter.notifyDataSetChanged();
             }
         }

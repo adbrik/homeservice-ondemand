@@ -21,7 +21,7 @@ public class ServiceProviderAdapter extends BaseExpandableListAdapter{
         this.serviceProvider = values;
         this.listHashMap = listHashMap;
     }
-    
+
     @Override
     public View getGroupView(int position, boolean b, View view, ViewGroup viewGroup) {
         Service curService = serviceProvider.get(position);
