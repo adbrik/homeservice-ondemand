@@ -1,6 +1,7 @@
 package com.seg2015.group.homeserviceondemand;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.Rating;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -26,7 +27,6 @@ public class HomeOwnerActivity extends AppCompatActivity {
     private HomeOwnerAdapter serviceAdapter;
     private FullService service;
     private ArrayList<FullService> services;
-    private ArrayList<String> names = new ArrayList<>();
     private HashMap<FullService,ArrayList<String>> listHashMap;
     private DatabaseReference databaseUsers;
     private boolean flag = true;
@@ -69,7 +69,30 @@ public class HomeOwnerActivity extends AppCompatActivity {
                 return true;
             }
         });
+        listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                final String item = (String)parent.getItemAtPosition(childPosition);
+                final int pos = parent.getPositionForView(v);
+                final View w = v;
 
+                PopupMenu popup = new PopupMenu(HomeOwnerActivity.this, v);
+                popup.getMenuInflater().inflate(R.menu.book_menu, popup.getMenu());
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if (item.getTitle().toString().equals("Book")){
+                            w.setBackgroundColor((Color.parseColor("#edea4b")));
+                            Toast toast = Toast.makeText(getApplicationContext(), "Service Booked!", Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                        return true;
+                    }
+                });
+                popup.show();
+                return true;
+            }
+        });
     }
 
     protected void onStart(){
@@ -77,12 +100,22 @@ public class HomeOwnerActivity extends AppCompatActivity {
         databaseUsers.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<String> z = new ArrayList<>();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()){
                     FullService service = postSnapshot.getValue(FullService.class);
                     if(flag ==true){
                         services.add(service);
                     }
+                    for (DataSnapshot postSnapshot1 : postSnapshot.child("availabilities").getChildren())
+                    {
+                        String time = postSnapshot1.getValue(String.class);
+                        z.add(time);
+
+                    }
+                    listHashMap.put(services.get(services.size()-1),z);
+                    listView.expandGroup(services.size()-1);
                 }
+                serviceAdapter.notifyDataSetChanged();
             }
 
             @Override
