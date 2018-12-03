@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,12 +35,14 @@ public class HomeOwnerAdapter extends BaseExpandableListAdapter{
         TextView hourlyRate = (TextView) view.findViewById(R.id.itemDescription);
         TextView serviceRate = (TextView) view.findViewById(R.id.rating);
         TextView providerName = (TextView) view.findViewById(R.id.provideName);
+        TextView comment = (TextView) view.findViewById(R.id.comment);
 
         //Placing content into recipe List Item
         serviceName.setText(curService.getServiceName());
         hourlyRate.setText(curService.getServiceRate());
         serviceRate.setText(curService.getServiceRating());
         providerName.setText(curService.getProvider());
+        comment.setText(curService.getComment());
 
         return view;
     }
@@ -57,6 +58,7 @@ public class HomeOwnerAdapter extends BaseExpandableListAdapter{
 
         TextView txtListChild = (TextView)view.findViewById(R.id.lblListItem);
         txtListChild.setText(childText);
+
         return view;
     }
 
@@ -75,8 +77,8 @@ public class HomeOwnerAdapter extends BaseExpandableListAdapter{
 
     @Override
     public int getChildrenCount(int i) {
-        //return listHashMap.get(serviceProvider.get(i)).size(); ARIK needs to fix this
-        return listHashMap.size();
+        return listHashMap.get(serviceProvider.get(i)).size(); //ARIK needs to fix this
+
     }
 
     @Override

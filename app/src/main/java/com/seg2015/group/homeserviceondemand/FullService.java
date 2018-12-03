@@ -6,13 +6,15 @@ public class FullService {
     String serviceRate;
     String provider;
     String serviceRating;
+    String comment;
 
 
-    public FullService(String provider, String serviceName, String serviceRate, String serviceRating){
+    public FullService(String provider, String serviceName, String serviceRate, String serviceRating, String comment){
         this.provider = provider;
         this.serviceName = serviceName;
         this.serviceRate = serviceRate;
         this.serviceRating = serviceRating;
+        this.comment = comment;
     }
 
     public FullService(){
@@ -34,4 +36,17 @@ public class FullService {
     public String getServiceRating() {
         return serviceRating;
     }
+
+    public String getComment() { return comment;}
+
+    public String setRate(String rating){
+        serviceRating = rating;
+        return serviceRating;
+    }
+
+    public String setComment(String a){
+        comment = a;
+        return comment;
+    }
+
 }

@@ -115,7 +115,7 @@ public class ServiceProviderActivity extends AppCompatActivity {
                 serviceAdapter.notifyDataSetChanged();
 
                 String id = databaseUsers.push().getKey();
-                databaseUsers.child(id).setValue(new FullService("Arik",service.getService(),service.getRate(),"0"));
+                databaseUsers.child(id).setValue(new FullService("Arik",service.getService(),service.getRate(),"No rating yet", "No comment yet"));
                 DatabaseReference newRef = databaseUsers.child(id);
                 String nId = newRef.push().getKey();
                 newRef.child(nId).setValue(z);

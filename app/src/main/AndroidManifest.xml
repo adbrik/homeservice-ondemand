@@ -25,7 +25,8 @@
         <activity android:name=".DisplayProfileActivity" />
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".AvailabilityActivity" />
-        <activity android:name=".HomeOwnerActivity"></activity>
+        <activity android:name=".HomeOwnerActivity" />
+        <activity android:name=".RatingActivity"></activity>
     </application>
 
 </manifest>
