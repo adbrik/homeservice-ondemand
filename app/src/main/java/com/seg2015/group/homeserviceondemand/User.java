@@ -29,4 +29,8 @@ public class User implements Serializable {
   public String getType() {
     return type;
   }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
 }

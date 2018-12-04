@@ -78,9 +78,11 @@ public class MainActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
                         User user = postSnapshot.getValue(User.class);
-                        if (username.equals(user.getName())&&password.equals(user.getPassword())){
-                            openWelcomeActivity(user);
-                        }
+                        String p ="";
+                        try{p = Sha1.hash(password);}catch (Exception e){}
+                            if (username.equals(user.getName())&&p.equals(user.getPassword())) {
+                                openWelcomeActivity(user);
+                            }
                     }
                 }
 

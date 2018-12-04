@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.PopupMenu;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -31,6 +32,13 @@ public class HomeOwnerActivity extends AppCompatActivity {
     private DatabaseReference databaseUsers;
     private boolean flag = true;
 
+    /* Searched Stuff
+
+     */
+    private HomeOwnerAdapter searchedAdapter;
+    private ArrayList<FullService> searchedServices;
+    private HashMap<FullService,ArrayList<String>> searchedMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +50,9 @@ public class HomeOwnerActivity extends AppCompatActivity {
         listView = (ExpandableListView)findViewById(R.id.allList);
         services = new ArrayList<>();
         listHashMap = new HashMap<>();
+
+        searchedServices= new ArrayList<>();
+        searchedMap = new HashMap<>();
 
         serviceAdapter = new HomeOwnerAdapter(HomeOwnerActivity.this, services, listHashMap);
         listView.setAdapter(serviceAdapter);
@@ -93,6 +104,34 @@ public class HomeOwnerActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        SearchView searchBar = (SearchView) findViewById(R.id.searchBar);
+        searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                //Toast toast = Toast.makeText(getApplicationContext(), query, Toast.LENGTH_SHORT);
+                //toast.show();
+                searchedServices.clear();
+                for (int i = 0; i < services.size(); i ++){
+                    if (services.get(i).getServiceName().contains(query) || services.get(i).getServiceRating().contains(query)){
+                        searchedServices.add(services.get(i));
+                    }
+                    for (int j = 0; j < listHashMap.get(i).size();j++){
+                        
+                    }
+                }
+                searchedAdapter = new HomeOwnerAdapter(HomeOwnerActivity.this, searchedServices, new HashMap<FullService,ArrayList<String>>());
+                listView.setAdapter(searchedAdapter);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //Toast toast = Toast.makeText(getApplicationContext(),newText, Toast.LENGTH_SHORT);
+                //toast.show();
+                return false;
+            }
+        });
     }
 
     protected void onStart(){
@@ -100,8 +139,8 @@ public class HomeOwnerActivity extends AppCompatActivity {
         databaseUsers.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ArrayList<String> z = new ArrayList<>();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()){
+                    ArrayList<String> z = new ArrayList<>();
                     FullService service = postSnapshot.getValue(FullService.class);
                     if(flag ==true){
                         services.add(service);

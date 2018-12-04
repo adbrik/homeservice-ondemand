@@ -14,6 +14,9 @@ import android.widget.Toast;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.*;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+
 public class CreateAccount extends AppCompatActivity {
 
   private String username;
@@ -107,6 +110,11 @@ public class CreateAccount extends AppCompatActivity {
         toast.show();
         String id = databaseUsers.push().getKey();
         User user = new User(username,password, type);
+        String hashp = password;
+        try { hashp = Sha1.hash(password);}
+        catch (Exception e){}
+
+        user.setPassword(hashp);
         databaseUsers.child(id).setValue(user);
         if (type.equals("ADMIN")){
           admin.child(admin.push().getKey()) .setValue(true);
