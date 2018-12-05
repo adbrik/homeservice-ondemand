@@ -6,13 +6,5 @@ __2018__
 @Jeremy Soong
 @Sebastian Tarnauceanu
 
-#Starts Here
 Build Status
-[![Build 
-Status](https://circleci.com/gh/
-SEG2105F18/ProductCatalog
-.png?branch=
-master
-)](https://circleci.com/gh/adbrik/homeservice-ondemand
-)
-#Ends Here
+[![Build Status](https://circleci.com/gh/adbrik/homeservice-ondemand.png?branch=master)](https://circleci.com/gh/adbrik/homeservice-ondemand)
