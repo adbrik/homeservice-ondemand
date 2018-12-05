@@ -116,11 +116,8 @@ public class HomeOwnerActivity extends AppCompatActivity {
                     if (services.get(i).getServiceName().contains(query) || services.get(i).getServiceRating().contains(query)){
                         searchedServices.add(services.get(i));
                     }
-                    for (int j = 0; j < listHashMap.get(i).size();j++){
-                        
-                    }
                 }
-                searchedAdapter = new HomeOwnerAdapter(HomeOwnerActivity.this, searchedServices, new HashMap<FullService,ArrayList<String>>());
+                searchedAdapter = new HomeOwnerAdapter(HomeOwnerActivity.this, searchedServices, listHashMap);
                 listView.setAdapter(searchedAdapter);
                 return true;
             }
