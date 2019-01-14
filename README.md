@@ -5,6 +5,3 @@ __2018__
 @Arik Barenboim
 @Jeremy Soong
 @Sebastian Tarnauceanu
-
-Build Status
-[![Build Status](https://circleci.com/gh/adbrik/homeservice-ondemand.png?branch=master)](https://circleci.com/gh/adbrik/homeservice-ondemand)
